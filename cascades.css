@@ -24,3 +24,4 @@ create_user() {
 
 # Usage: create_user <username> <password>
 create_user "newuser" "password123"
+false
