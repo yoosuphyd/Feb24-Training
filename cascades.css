@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Function to create user, set password, and add to IT group
+create_user() {
+    username=$1
+    password=$2
+    
+    # Check if user already exists
+    if id "$username" &>/dev/null; then
+        echo "User $username already exists."
+    else
+        # Create user
+        sudo useradd -m "$username"
+        
+        # Set password
+        echo "$username:$password" | sudo chpasswd
+        
+        # Add user to IT group
+        sudo usermod -aG IT "$username"
+        
+        echo "User $username created and added to IT group."
+    fi
+}
+
+# Usage: create_user <username> <password>
+create_user "newuser" "password123"
